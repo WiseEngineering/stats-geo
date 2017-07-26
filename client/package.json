@@ -1,0 +1,33 @@
+{
+  "name": "stats-geo-client",
+  "version": "0.0.1",
+  "description": "GEO oriented stats client",
+  "main": "js/client.js",
+  "scripts": {
+    "test": "npm test",
+    "build": "node_modules/webpack/bin/webpack.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yaro-m/stats-geo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yaro-m/stats-geo/issues"
+  },
+  "homepage": "https://github.com/yaro-m/stats-geo/blob/master/README.md",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "css-loader": "^0.26.1",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.10.0",
+    "helmet": "^3.4.0",
+    "jquery": "^3.1.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0"
+  }
+}
