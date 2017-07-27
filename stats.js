@@ -6,6 +6,9 @@ var metrics = {};
 
 function flushMetrics() {
     // Aggregate and save metrics to backend
+
+    console.log(metrics);
+
     metrics = {};
 }
 
@@ -16,22 +19,31 @@ function sanitizeStatName(stat) {
 function saveMetric(message) {
     var packet_data = message.toString();
 
-    if (packet_data.indexOf(":") > -1 && (packet_data.split(":").length) == 3) {
-        var data = packet_data.split(":");
+    if (packet_data.indexOf("\n") > -1) {
+        packet_data = packet_data.split("\n")[0];
+    }
+
+    // Get sample rate
+    if (packet_data.indexOf("@") > -1) {
+        var sampled_data = packet_data;
     } else {
-        var data = [packet_data, '0 - 0', '1'];
+        var sampled_data = `${packet_data}@1`;
     }
 
-    var key = data[0];
-    var coords = data[1];
-    var value = data[2];
+    // Spplit sample rate and data
+    var sample_data = sampled_data.split("@")[0];
+    var sample_rate = sampled_data.split("@")[1];
 
-    if (value.indexOf("\n") > -1) {
-        value = value.split("\n")[0];
+    // Get data points
+    if (sample_data.indexOf("|") > -1 && (sample_data.split("|").length) == 3) {
+        var data = sample_data.split("|");
+    } else {
+        var data = [sample_data, '0.0,0.0', 1];
     }
 
-    var key = sanitizeStatName(key);
-    value = Number(value);
+    var key = sanitizeStatName(data[0].toString());
+    var coords = data[1].toString();
+    var value = Number(data[2] / sample_rate);
 
     if (typeof metrics[key] == 'undefined') {
         metrics[key] = {};
@@ -42,8 +54,6 @@ function saveMetric(message) {
     } else {
         metrics[key][coords] += value;
     }
-
-    console.log(metrics);
 }
 
 function startServer() {
