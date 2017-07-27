@@ -7,7 +7,10 @@ var metrics = {};
 
 function flushMetrics() {
     // Save metrics to backend
-    publisher.publish(config.backends.redis.channel, JSON.stringify(metrics));
+
+    if (config.backend == "redis") {
+        publisher.publish(config.backends[config.backend].channel, JSON.stringify(metrics));
+    }
 
     // Flush metrics
     metrics = {};
@@ -59,7 +62,10 @@ function saveMetric(message) {
 
 function startServer() {
     var server = dgram.createSocket('udp4');
-    publisher  = redis.createClient(config.backends.redis.port, config.backends.redis.host);
+
+    if (config.backend == "redis") {
+        publisher  = redis.createClient(config.backends[config.backend].port, config.backends[config.backend].host);
+    }
 
     server.on('message', function (message, remote) {
         saveMetric(message);
