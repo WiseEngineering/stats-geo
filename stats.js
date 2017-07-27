@@ -32,11 +32,22 @@ function sanitizeStatName(stat) {
 }
 
 function roundCoords(string_coords) {
+    var ranges_map = {1: 5, 10: 4, 100: 3, 1000: 2, 10000: 1};
+
+    if (!(config.aggregate_radius in ranges_map)) {
+        config.aggregate_radius = 1000;
+    }
+
+    var round = ranges_map[config.aggregate_radius];
+
     if (string_coords.indexOf(",") > -1) {
         var coords = string_coords.split(",");
     }
 
-    return string_coords;
+    var lat = Number(coords[0]).toFixed(round);
+    var lon = Number(coords[1]).toFixed(round);
+
+    return `${lat},${lon}`;
 }
 
 function saveMetric(message) {
