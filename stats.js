@@ -1,14 +1,15 @@
 var dgram = require('dgram');
-var server = dgram.createSocket('udp4');
+var redis = require("redis");
 var config = require('./config/config');
 
+var publisher;
 var metrics = {};
 
 function flushMetrics() {
-    // Aggregate and save metrics to backend
+    // Save metrics to backend
+    publisher.publish(config.backends.redis.channel, JSON.stringify(metrics));
 
-    console.log(metrics);
-
+    // Flush metrics
     metrics = {};
 }
 
@@ -43,20 +44,23 @@ function saveMetric(message) {
 
     var key = sanitizeStatName(data[0].toString());
     var coords = data[1].toString();
-    var value = Number(data[2] / sample_rate);
+    var value = Number(data[2] / sample_rate * config.flushInterval / 1000);
 
     if (typeof metrics[key] == 'undefined') {
         metrics[key] = {};
     }
 
     if (typeof metrics[key][coords] == 'undefined') {
-        metrics[key][coords] = value;
+        metrics[key][coords] = {value: value, count: 1};
     } else {
-        metrics[key][coords] += value;
+        metrics[key][coords] = {value: metrics[key][coords].value += value, count: metrics[key][coords].count += 1};
     }
 }
 
 function startServer() {
+    var server = dgram.createSocket('udp4');
+    publisher  = redis.createClient();
+
     server.on('message', function (message, remote) {
         saveMetric(message);
     });

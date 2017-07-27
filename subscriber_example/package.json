@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:yaro-m/stats-geo.git"
+    "url": "git@github.com:WiseEngineering/stats-geo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yaro-m/stats-geo/issues"
+    "url": "https://github.com/WiseEngineering/stats-geo/issues"
   },
-  "homepage": "https://github.com/yaro-m/stats-geo/blob/master/README.md",
+  "homepage": "https://github.com/WiseEngineering/stats-geo/blob/master/README.md",
   "dependencies": {
     "body-parser": "^1.16.0",
     "css-loader": "^0.26.1",

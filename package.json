@@ -1,0 +1,23 @@
+{
+  "name": "stats-geo-server",
+  "version": "0.0.1",
+  "description": "GEO oriented stats aggregation server",
+  "main": "stats.js",
+  "scripts": {
+    "test": "npm test",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:WiseEngineering/stats-geo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WiseEngineering/stats-geo/issues"
+  },
+  "homepage": "https://github.com/WiseEngineering/stats-geo/blob/master/README.md",
+  "dependencies": {
+    "redis": "^2.7.1"
+  }
+}
