@@ -1,5 +1,6 @@
 # stats-geo
 GEO oriented stats aggregation server.
+
 Aggregates metrics values by GPS coordinates and translates aggregated data to subscribers using Pub/Sub pattern.
 
 # Run dev
