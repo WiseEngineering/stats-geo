@@ -59,7 +59,7 @@ function saveMetric(message) {
 
 function startServer() {
     var server = dgram.createSocket('udp4');
-    publisher  = redis.createClient();
+    publisher  = redis.createClient(config.backends.redis.port, config.backends.redis.host);
 
     server.on('message', function (message, remote) {
         saveMetric(message);
