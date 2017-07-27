@@ -6,10 +6,21 @@ var publisher;
 var metrics = {};
 
 function flushMetrics() {
-    // Save metrics to backend
+    // Aggregate metrics
+    var stats = {};
+    for (metric in metrics) {
+        for (coords in metrics[metric]) {
+            if (typeof stats[metric] == 'undefined') {
+                stats[metric] = {};
+            }
 
+            stats[metric][coords] = {value: metrics[metric][coords].value / (config.flushInterval / 1000), count: metrics[metric][coords].count / (config.flushInterval / 1000)}
+        }
+    }
+
+    // Save metrics to backend
     if (config.backend == "redis") {
-        publisher.publish(config.backends[config.backend].channel, JSON.stringify(metrics));
+        publisher.publish(config.backends[config.backend].channel, JSON.stringify(stats));
     }
 
     // Flush metrics
@@ -18,6 +29,14 @@ function flushMetrics() {
 
 function sanitizeStatName(stat) {
     return stat.replace(/[^a-zA-Z_\-0-9\.]/g, '');
+}
+
+function roundCoords(string_coords) {
+    if (string_coords.indexOf(",") > -1) {
+        var coords = string_coords.split(",");
+    }
+
+    return string_coords;
 }
 
 function saveMetric(message) {
@@ -46,17 +65,17 @@ function saveMetric(message) {
     }
 
     var key = sanitizeStatName(data[0].toString());
-    var coords = data[1].toString();
-    var value = Number(data[2] / sample_rate * config.flushInterval / 1000);
+    var string_coords = roundCoords(data[1].toString());
+    var value = Number(data[2] / sample_rate);
 
     if (typeof metrics[key] == 'undefined') {
         metrics[key] = {};
     }
 
-    if (typeof metrics[key][coords] == 'undefined') {
-        metrics[key][coords] = {value: value, count: 1};
+    if (typeof metrics[key][string_coords] == 'undefined') {
+        metrics[key][string_coords] = {value: value, count: 1};
     } else {
-        metrics[key][coords] = {value: metrics[key][coords].value += value, count: metrics[key][coords].count += 1};
+        metrics[key][string_coords] = {value: metrics[key][string_coords].value += value, count: metrics[key][string_coords].count += 1};
     }
 }
 
