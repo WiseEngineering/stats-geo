@@ -1,6 +1,8 @@
 # stats-geo
 GEO oriented stats aggregation server.
 
+Inspired by Etsy/StatsD.
+
 Aggregates metrics values by GPS coordinates and translates aggregated data to subscribers using Pub/Sub pattern.
 
 # Run dev
