@@ -6,6 +6,8 @@ Inspired by Etsy/StatsD.
 Aggregates metrics values by GPS coordinates and translates aggregated data to subscribers using Pub/Sub pattern.
 
 # Run dev
+`npm install`
+
 `node stats.js`
 
 # Send sample stats
