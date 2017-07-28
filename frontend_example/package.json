@@ -2,21 +2,7 @@
   "name": "stats-geo-client",
   "version": "0.0.1",
   "description": "GEO oriented stats client",
-  "main": "js/client.js",
-  "scripts": {
-    "test": "npm test",
-    "build": "node_modules/webpack/bin/webpack.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:WiseEngineering/stats-geo.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/WiseEngineering/stats-geo/issues"
-  },
-  "homepage": "https://github.com/WiseEngineering/stats-geo/blob/master/README.md",
+  "main": "client.js",
   "dependencies": {
     "body-parser": "^1.17.2",
     "css-loader": "^0.28.4",
