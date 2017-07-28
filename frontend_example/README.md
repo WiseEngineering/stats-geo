@@ -1,4 +1,4 @@
-# Display GEo stats
+# Display GEO stats
 GEO stats frontend example.
 
 # Run dev
