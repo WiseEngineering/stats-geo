@@ -3,3 +3,4 @@ client/node_modules
 .DS_Store
 client/public/js
 client/public/css/styles.css
+.vscode
