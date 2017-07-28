@@ -20,6 +20,6 @@ app.get('/', function (req, res) {
 	res.render('index');
 });
 
-http.Server(app).listen(process.env.APP_HTTP_LISTEN || 3000, function() {
+http.Server(app).listen(process.env.PORT || 3000, function() {
 	console.log('listening on *:3000');
 });
