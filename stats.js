@@ -20,6 +20,9 @@ function flushMetrics() {
 
     // Save metrics to backend
     if (config.backend == "redis") {
+        console.log("flush");
+        console.log(stats);
+
         publisher.publish(config.backends[config.backend].channel, JSON.stringify(stats));
     }
 
