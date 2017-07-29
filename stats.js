@@ -98,6 +98,7 @@ function startServer() {
     }
 
     server.on('message', function (message, remote) {
+        console.log(message);
         saveMetric(message);
     });
 
