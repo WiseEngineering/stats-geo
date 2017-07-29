@@ -17,6 +17,8 @@ $(document).ready(function(){
     socket.on('stats', function(msg){
         var stats = JSON.parse(msg);
 
+        console.log(msg);
+
         for (metric in stats) {
             for (coords in stats[metric]) {
                 drawMarker(

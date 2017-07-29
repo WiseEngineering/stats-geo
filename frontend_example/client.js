@@ -36,10 +36,11 @@ io.on('connection', function(socket) {
 	clientid = socket.id;
 
 	subscriber.on("message", function(channel, message) {
+		console.log(message);
 		io.to(clientid).emit('stats', message);
 	});
 });
 
-http.listen(process.env.PORT || 3000, function() {
+http.listen(process.env.PORT || 3000, process.env.HOST || '127.0.0.1', function() {
 	console.log('listening on *:3000');
 });
