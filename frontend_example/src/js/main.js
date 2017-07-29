@@ -4,6 +4,8 @@ require('../css/vector-map.css');
 require('jquery');
 require('./vector-map.min.js');
 require('./world-mill.js');
+const googleMap = require('https://maps.googleapis.com/maps/api/js?key=AIzaSyDMgnsp7HMAHLR_ntjubgpnt3A8evQvsgg');
+require('./map.js');
 
 function drawMarker(lat, lon, value) {
 
