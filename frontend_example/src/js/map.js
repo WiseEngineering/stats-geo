@@ -1,6 +1,7 @@
 define([], () => {
+    let markers = [];
+
     return {
-        markers: [],
 
         init: () => {
             return new google.maps.Map(document.getElementById('map'), {
@@ -17,14 +18,14 @@ define([], () => {
                 map: map
             });
 
-            this.markers.push(marker);
+            markers.push(marker);
         },
 
         clearMarkers: () => {
             if (Map.markers.length > 0) {
                 for (let i = 0; i < Map.markers.length; i++) {
-                    this.markers[i].setMap(null);
-                    this.markers.splice(i);
+                    markers[i].setMap(null);
+                    markers.splice(i);
                 }
             }
         }
