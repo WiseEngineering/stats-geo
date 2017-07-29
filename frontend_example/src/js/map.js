@@ -17,14 +17,14 @@ define([], () => {
                 map: map
             });
 
-            Map.markers.push(marker);
+            this.markers.push(marker);
         },
 
         clearMarkers: () => {
             if (Map.markers.length > 0) {
                 for (let i = 0; i < Map.markers.length; i++) {
-                    Map.markers[i].setMap(null);
-                    Map.markers.splice(i);
+                    this.markers[i].setMap(null);
+                    this.markers.splice(i);
                 }
             }
         }
