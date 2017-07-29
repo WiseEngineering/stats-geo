@@ -5,8 +5,8 @@ require('jquery');
 let Map = require('./map.js');
 const GoogleMap = Map.init();
 
-function drawMarker(map, lat, lon, value) {
-    Map.addMarker(map, lat, lon, value);
+function drawMarker(lat, lon, value) {
+    Map.addMarker(GoogleMap, lat, lon, value);
 }
 
 $(document).ready(function(){
