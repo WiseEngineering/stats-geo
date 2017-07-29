@@ -24,7 +24,9 @@ COUNTER=0
  	lat=$(($RANDOM %181-90))"."$(($RANDOM % 32767))
 	metric_value=$(($RANDOM % $MCC))
  	
-	sleep($(($RANDOM % 5)))
+ 	sleep_time=$(($RANDOM % 5))
+	sleep $sleep_time
+
 	exec_str="echo \""${metrics[$metric_value]}"|"$lat","$long"|10@0.1\"  | nc -u -w0 192.168.7.133 8190"
 
  	eval $exec_str
