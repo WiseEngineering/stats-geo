@@ -1,4 +1,5 @@
 module.exports = {
+    backend: "redis",
     backends: {
         redis: {
             host: '127.0.0.1',

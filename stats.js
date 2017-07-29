@@ -94,7 +94,7 @@ function startServer() {
     var server = dgram.createSocket('udp4');
 
     if (config.backend == "redis") {
-        publisher  = redis.createClient(config.backends[config.backend].port, config.backends[config.backend].host);
+        publisher = redis.createClient(config.backends[config.backend].port, config.backends[config.backend].host);
     }
 
     server.on('message', function (message, remote) {

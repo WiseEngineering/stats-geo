@@ -7,8 +7,12 @@ var fs = require('fs');
 var redis = require("redis");
 var config = require('./config/config');
 
-var subscriber = redis.createClient();
-subscriber.subscribe(config.backends.redis.channel);
+var subscriber;
+
+if (config.backend == "redis") {
+	subscriber = redis.createClient(config.backends[config.backend].port, config.backends[config.backend].host);
+	subscriber.subscribe(config.backends.redis.channel);
+}
 
 var app = express();
 var http = require('http').createServer(app);
