@@ -2,15 +2,14 @@ require('../css/main.css');
 require('../css/vector-map.css');
 
 require('jquery');
-require('./vector-map.min.js');
-require('./world-mill.js');
+let Map = require('./map.js');
+const GoogleMap = Map.init();
 
-function drawMarker(lat, lon, value) {
-
+function drawMarker(map, lat, lon, value) {
+    Map.addMarker(map, lat, lon, value);
 }
 
 $(document).ready(function(){
-    $('#world-map').vectorMap({map: 'world_mill'});
 
     var socket = io();
 
