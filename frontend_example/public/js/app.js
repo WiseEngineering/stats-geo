@@ -10777,6 +10777,12 @@ __webpack_require__(10);
 
 $(document).ready(function(){
     $('#world-map').vectorMap({map: 'world_mill'});
+
+    var socket = io();
+
+    socket.on('stats', function(msg){
+        console.log(msg);
+    });
 });
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))

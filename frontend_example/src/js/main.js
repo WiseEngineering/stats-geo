@@ -7,4 +7,10 @@ require('./world-mill.js');
 
 $(document).ready(function(){
     $('#world-map').vectorMap({map: 'world_mill'});
+
+    var socket = io();
+
+    socket.on('stats', function(msg){
+        console.log(msg);
+    });
 });
