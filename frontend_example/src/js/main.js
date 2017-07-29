@@ -23,7 +23,7 @@ $(document).ready(function(){
                 drawMarker(
                     parseFloat(coords.split(",")[0]),
                     parseFloat(coords.split(",")[1]),
-                    stats[metric][coords].value
+                    stats[metric][coords].value.toString()
                 );
             }
         }
