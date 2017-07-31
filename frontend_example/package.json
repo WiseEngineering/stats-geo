@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "GEO oriented stats client",
   "main": "client.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node client.js"
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "css-loader": "^0.28.4",
