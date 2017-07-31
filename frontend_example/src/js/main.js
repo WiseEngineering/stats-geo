@@ -14,15 +14,15 @@ function drawDataPoint(lat, lon, value) {
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    lat,
-                    lon
+                    lon,
+                    lat
                 ]
             }
         }]
     };
 
     map.data.setStyle(function() {
-        var scale = Math.sqrt(value) * 5;
+        var scale = Math.sqrt(value) * 2;
         return ({
         icon: {
             path: google.maps.SymbolPath.CIRCLE,
