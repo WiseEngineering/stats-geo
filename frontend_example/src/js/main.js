@@ -29,7 +29,8 @@ function drawDataPoint(lat, lon, value) {
             scale: scale,
             fillColor: '#f00',
             fillOpacity: 0.35,
-            strokeWeight: 0
+            strokeWeight: 1,
+            stroColor: '#fff'
         }
         });
     });
