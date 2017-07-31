@@ -4,39 +4,22 @@ require('../css/vector-map.css');
 require('jquery');
 const map = require('./google_map.js').init();
 
-function drawDataPoint(lat, lon, value) {
+map.data.setStyle(function(feature) {
+    var scale = Math.sqrt(parseFloat(feature.getProperty('value'))) * 2;
 
-    var geojson = {
-        "type": "FeatureCollection",
-        "features": [{
-            "type": "Feature",
-            "id": 0,
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    lon,
-                    lat
-                ]
-            }
-        }]
-    };
+    console.log(scale);
 
-    map.data.setStyle(function() {
-        var scale = Math.sqrt(value) * 2;
-        return ({
-        icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: scale,
-            fillColor: '#f00',
-            fillOpacity: 0.35,
-            strokeWeight: 1,
-            stroColor: '#fff'
-        }
-        });
+    return ({
+    icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: scale,
+        fillColor: '#f00',
+        fillOpacity: 0.35,
+        strokeWeight: 1,
+        strokeColor: '#fff'
+    }
     });
-
-    currentGeoJsonData = map.data.addGeoJson(geojson);
-}
+});
 
 $(document).ready(function(){
 
@@ -45,20 +28,36 @@ $(document).ready(function(){
     socket.on('stats', function(msg){
         var stats = JSON.parse(msg);
 
-        console.log(msg);
-
         map.data.forEach(function (feature) {
             map.data.remove(feature);
         });
 
+        var geojson = {
+            "type": "FeatureCollection",
+            "features": []
+        };
+
+        var i = 0;
         for (metric in stats) {
             for (coords in stats[metric]) {
-                drawDataPoint(
-                    parseFloat(coords.split(",")[0]),
-                    parseFloat(coords.split(",")[1]),
-                    stats[metric][coords].value.toString()
-                );
+                geojson.features.push({
+                    "type": "Feature",
+                    "id": i,
+                    "properties": {
+                        "value": stats[metric][coords].value.toString()
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            parseFloat(coords.split(",")[1]),
+                            parseFloat(coords.split(",")[0])
+                        ]
+                    }
+                });
+
             }
         }
+
+        map.data.addGeoJson(geojson);
     });
 });
