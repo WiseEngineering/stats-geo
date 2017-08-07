@@ -5,7 +5,7 @@
   "main": "stats.js",
   "scripts": {
     "test": "npm test",
-    "start": "node stats.js"
+    "start": "nodemon stats.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/WiseEngineering/stats-geo/blob/master/README.md",
   "dependencies": {
     "redis": "^2.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

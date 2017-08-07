@@ -1,22 +1,21 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require("body-parser");
-var exphbs = require('express-handlebars');
-var helmet = require('helmet');
-var fs = require('fs');
-var redis = require("redis");
-var config = require('./config/config');
+const express 	 = require('express')
+	, path 		 = require('path')
+	, bodyParser = require("body-parser")
+	, exphbs 	 = require('express-handlebars')
+	, helmet 	 = require('helmet')
+	, fs 		 = require('fs')
+	, redis 	 = require("redis")
+	, config 	 = require('./config/config')
+	, app 		 = express()
+	, http 		 = require('http').createServer(app)
+ 	, io 		 = require('socket.io')(http);
 
-var subscriber;
+let subscriber;
 
 if (config.backend == "redis") {
 	subscriber = redis.createClient(config.backends[config.backend].port, config.backends[config.backend].host);
 	subscriber.subscribe(config.backends.redis.channel);
 }
-
-var app = express();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,7 +29,7 @@ app.get('/', function (req, res) {
 	res.render('index');
 });
 
-var clientid;
+let clientid;
 
 io.on('connection', function(socket) {
 	clientid = socket.id;
