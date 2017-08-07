@@ -5,7 +5,7 @@ require('jquery');
 const map = require('./google_map.js').init();
 
 map.data.setStyle(function(feature) {
-    var scale = Math.sqrt(parseFloat(feature.getProperty('value'))) * 2;
+    let scale = Math.sqrt(parseFloat(feature.getProperty('value'))) * 2;
 
     console.log(scale);
 
@@ -23,21 +23,21 @@ map.data.setStyle(function(feature) {
 
 $(document).ready(function(){
 
-    var socket = io();
+    let socket = io();
 
     socket.on('stats', function(msg){
-        var stats = JSON.parse(msg);
+        let stats = JSON.parse(msg);
 
         map.data.forEach(function (feature) {
             map.data.remove(feature);
         });
 
-        var geojson = {
+        let geojson = {
             "type": "FeatureCollection",
             "features": []
         };
 
-        var i = 0;
+        let i = 0;
         for (metric in stats) {
             for (coords in stats[metric]) {
                 geojson.features.push({

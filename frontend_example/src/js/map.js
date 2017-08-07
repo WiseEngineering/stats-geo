@@ -25,7 +25,6 @@ define([], () => {
             if (Map.markers.length > 0) {
                 for (let i = 0; i < Map.markers.length; i++) {
                     markers[i].setMap(null);
-                    markers.splice(i);
                 }
             }
         }
