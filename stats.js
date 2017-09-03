@@ -43,8 +43,9 @@ function roundCoords(string_coords) {
 
     let round = ranges_map[config.aggregate_radius];
 
+    let coords;
     if (string_coords.indexOf(",") > -1) {
-        let coords = string_coords.split(",");
+        coords = string_coords.split(",");
     }
 
     let lat = Number(coords[0]).toFixed(round);
@@ -61,10 +62,11 @@ function saveMetric(message) {
     }
 
     // Get sample rate
+    let sampled_data;
     if (packet_data.indexOf("@") > -1) {
-        let sampled_data = packet_data;
+        sampled_data = packet_data;
     } else {
-        let sampled_data = `${packet_data}@1`;
+        sampled_data = `${packet_data}@1`;
     }
 
     // Spplit sample rate and data
@@ -72,10 +74,11 @@ function saveMetric(message) {
     let sample_rate = sampled_data.split("@")[1];
 
     // Get data points
+    let data;
     if (sample_data.indexOf("|") > -1 && (sample_data.split("|").length) == 3) {
-        let data = sample_data.split("|");
+        data = sample_data.split("|");
     } else {
-        let data = [sample_data, '0.0,0.0', 1];
+        data = [sample_data, '0.0,0.0', 1];
     }
 
     let key = sanitizeStatName(data[0].toString());
