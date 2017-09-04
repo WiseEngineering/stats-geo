@@ -6,7 +6,7 @@ while [  True ]; do
 	lat=$(($RANDOM % 180 - 90))"."$(($RANDOM % 32767))
 	metric_value=$(($RANDOM % 100))
 
-	sleep_time=$(($RANDOM % 1 + 1))
+	sleep_time=$(($RANDOM % 1))
 
 	sleep $sleep_time
 
