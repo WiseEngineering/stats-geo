@@ -11,7 +11,7 @@ while [  True ]; do
 
 	#echo "purchase|$lat,$long|$metric_value@0.1"
 
-	exec_str="echo \"purchase|$lat,$long|$metric_value@0.1\" | nc -u -w0 127.0.0.1 8190"
+	exec_str="echo \"purchase|$lat,$long|$metric_value@0.1\" | nc -u -w1 127.0.0.1 8190"
 
 	eval $exec_str
 done
