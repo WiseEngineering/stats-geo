@@ -1,4 +1,4 @@
-# stats-geo
+# StatsG
 GEO oriented stats aggregation server.
 
 Inspired by Etsy/StatsD.
