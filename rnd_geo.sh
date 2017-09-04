@@ -4,9 +4,9 @@
 while [  True ]; do
 	long=$(($RANDOM % 360 - 180))"."$(($RANDOM % 32767))
 	lat=$(($RANDOM % 180 - 90))"."$(($RANDOM % 32767))
-	metric_value=$(($RANDOM % 500))
+	metric_value=$(($RANDOM % 100))
 
-	sleep_time=$(($RANDOM % 2 + 1))
+	sleep_time=$(($RANDOM % 1 + 1))
 
 	sleep $sleep_time
 
