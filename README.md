@@ -11,6 +11,10 @@ Aggregates metrics values by GPS coordinates and translates aggregated data to s
 `node stats.js`
 
 # Send sample stats
-`echo "metric_name|lat,lon|value[@sample_rate]" | nc -u -w0 127.0.0.1 8190`
+Basic protocol
+
+`<metric_name>|<lat,lon>|<value>[@sample_rate]`
+
+Command line example
 
 `echo "purchase|49.54044734889645,25.58182640021074|10@0.1" | nc -u -w0 127.0.0.1 8190`
